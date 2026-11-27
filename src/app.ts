@@ -17,6 +17,7 @@ import authRoutes from './modules/auth/auth.route';
 import categoriesRoutes from './modules/categories/categories.route';
 import customersRoutes from './modules/customers/customers.route';
 import paymentsRoutes from './modules/payments/payments.route';
+import productsRoutes from './modules/products/products.route';
 import settingsRoutes from './modules/settings/settings.route';
 import suppliersRoutes from './modules/suppliers/suppliers.route';
 import usersRoutes from './modules/users/users.route';
@@ -69,6 +70,7 @@ app.use('/api', categoriesRoutes);
 app.use('/api', suppliersRoutes);
 app.use('/api', customersRoutes);
 app.use('/api', paymentsRoutes);
+app.use('/api', productsRoutes);
 
 // 404 & Global Error Handlers
 app.use(notFound);

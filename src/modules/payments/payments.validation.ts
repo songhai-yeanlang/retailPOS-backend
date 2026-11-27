@@ -61,10 +61,10 @@ export const updatePaymentMethodSchema: ValidationSchema = {
       'string.empty': 'Payment method name cannot be empty',
       'string.max': 'Payment method name must not exceed 50 characters',
     }),
-    type: typeField.optional(),
+    type: typeField.empty('').optional(),
     accountName: accountNameField.optional(),
     accountNumber: accountNumberField.optional(),
-    isActive: Joi.boolean().optional(),
+    isActive: Joi.boolean().empty('').optional(),
     removeQrImage: Joi.boolean().empty('').optional(),
   }),
 };
