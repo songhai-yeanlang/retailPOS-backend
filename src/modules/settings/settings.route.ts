@@ -9,7 +9,7 @@ import {
 
 const router = Router();
 
-router.use(authenticate);
+router.use('/settings', authenticate);
 
 router.get('/settings', authorize('owner', 'manager', 'cashier'), settingsController.getSettings);
 router.put('/settings', authorize('owner'), validate(updateSettingsSchema), settingsController.updateSettings);

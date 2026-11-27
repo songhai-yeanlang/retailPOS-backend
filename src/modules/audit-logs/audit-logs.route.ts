@@ -9,7 +9,7 @@ import {
 
 const router = Router();
 
-router.use(authenticate);
+router.use('/audit-logs', authenticate);
 
 router.get('/audit-logs', authorize('owner', 'manager'), validate(listAuditLogsSchema), auditLogsController.listAuditLogs);
 router.get('/audit-logs/:id', authorize('owner', 'manager'), validate(auditLogIdParamSchema), auditLogsController.getAuditLogById);
