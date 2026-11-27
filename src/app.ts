@@ -14,7 +14,12 @@ import logger from './utils/logger.util';
 // Feature Routes
 import auditLogsRoutes from './modules/audit-logs/audit-logs.route';
 import authRoutes from './modules/auth/auth.route';
+import categoriesRoutes from './modules/categories/categories.route';
+import customersRoutes from './modules/customers/customers.route';
+import paymentsRoutes from './modules/payments/payments.route';
 import settingsRoutes from './modules/settings/settings.route';
+import suppliersRoutes from './modules/suppliers/suppliers.route';
+import usersRoutes from './modules/users/users.route';
 
 export const app = express();
 
@@ -59,6 +64,11 @@ app.use('/api', apiRateLimiter);
 app.use('/api/auth', authRoutes);
 app.use('/api', auditLogsRoutes);
 app.use('/api', settingsRoutes);
+app.use('/api', usersRoutes);
+app.use('/api', categoriesRoutes);
+app.use('/api', suppliersRoutes);
+app.use('/api', customersRoutes);
+app.use('/api', paymentsRoutes);
 
 // 404 & Global Error Handlers
 app.use(notFound);
