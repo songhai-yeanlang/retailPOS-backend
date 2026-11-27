@@ -12,7 +12,9 @@ import { apiRateLimiter } from './middlewares/rate-limiter';
 import logger from './utils/logger.util';
 
 // Feature Routes
+import auditLogsRoutes from './modules/audit-logs/audit-logs.route';
 import authRoutes from './modules/auth/auth.route';
+import settingsRoutes from './modules/settings/settings.route';
 
 export const app = express();
 
@@ -54,7 +56,9 @@ app.get('/api/health', (_req: Request, res: Response): void => {
 app.use('/api', apiRateLimiter);
 
 // Register Feature Endpoints
-app.use('/api/v1/auth', authRoutes);
+app.use('/api/auth', authRoutes);
+app.use('/api', auditLogsRoutes);
+app.use('/api', settingsRoutes);
 
 // 404 & Global Error Handlers
 app.use(notFound);
