@@ -18,7 +18,7 @@ router.use('/payments', authenticate);
 router.get('/payments', authorize('owner', 'manager', 'cashier'), validate(listPaymentMethodsSchema), paymentsController.listPaymentMethods);
 router.get('/payments/:id', authorize('owner', 'manager', 'cashier'), validate(paymentMethodIdParamSchema), paymentsController.getPaymentMethodById);
 router.post('/payments', authorize('owner', 'manager'), ...uploadImage('qrImage', 'payments'), validate(createPaymentMethodSchema), paymentsController.createPaymentMethod);
-router.put('/payments/:id', authorize('owner', 'manager'), ...uploadImage('qrImage', 'payments'), validate(updatePaymentMethodSchema), paymentsController.updatePaymentMethod);
+router.put('/payments/:id', authorize('owner', 'manager'), validate(paymentMethodIdParamSchema), ...uploadImage('qrImage', 'payments'), validate(updatePaymentMethodSchema), paymentsController.updatePaymentMethod);
 router.patch('/payments/:id/status', authorize('owner', 'manager'), validate(updatePaymentMethodStatusSchema), paymentsController.updatePaymentMethodStatus);
 router.delete('/payments/:id', authorize('owner'), validate(paymentMethodIdParamSchema), paymentsController.deletePaymentMethod);
 
