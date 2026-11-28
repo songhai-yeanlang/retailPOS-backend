@@ -396,6 +396,18 @@ export const updateProductStockById = async (id: number, stockQty: number, conne
   return result.affectedRows;
 };
 
+export const updateProductStockAndCostById = async (id: number, stockQty: number, costPrice: number, connection: PoolConnection | null = null): Promise<number> => {
+  const db = getExecutor(connection);
+  const [result] = await db.execute<ResultSetHeader>(
+    `UPDATE products
+     SET stock_qty = ?, cost_price = ?
+     WHERE id = ?`,
+    [stockQty, costPrice, id],
+  );
+
+  return result.affectedRows;
+};
+
 export const deleteProductById = async (id: number, connection: PoolConnection | null = null): Promise<number> => {
   const db = getExecutor(connection);
   const [result] = await db.execute<ResultSetHeader>(
@@ -415,6 +427,7 @@ export const productsModel = {
   updateProductById,
   updateProductStatusById,
   updateProductStockById,
+  updateProductStockAndCostById,
   deleteProductById,
 };
 
