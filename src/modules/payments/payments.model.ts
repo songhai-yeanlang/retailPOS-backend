@@ -171,6 +171,19 @@ export const findPaymentMethodById = async (id: number, connection: PoolConnecti
   return rows[0] ? mapPaymentMethodRow(rows[0]) : null;
 };
 
+export const findPaymentMethodBasicById = async (id: number, connection: PoolConnection | null = null): Promise<PaymentMethodRecord | null> => {
+  const db = getExecutor(connection);
+  const [rows] = await db.query<PaymentMethodRow[]>(
+    `SELECT id, name, type, account_name, account_number, qr_image, is_active, created_at
+     FROM payment_methods
+     WHERE id = ?
+     LIMIT 1`,
+    [id],
+  );
+
+  return rows[0] ? mapPaymentMethodRow(rows[0]) : null;
+};
+
 export const findPaymentMethodByIdForUpdate = async (id: number, connection: PoolConnection): Promise<PaymentMethodRecord | null> => {
   const [rows] = await connection.query<PaymentMethodRow[]>(
     `SELECT id, name, type, account_name, account_number, qr_image, is_active, created_at
@@ -302,6 +315,7 @@ export const deletePaymentMethodById = async (id: number, connection: PoolConnec
 export const paymentsModel = {
   findPaymentMethods,
   findPaymentMethodById,
+  findPaymentMethodBasicById,
   findPaymentMethodByIdForUpdate,
   findPaymentMethodByName,
   createPaymentMethod,
